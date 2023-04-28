@@ -1,14 +1,19 @@
 const main = Array.from(document.getElementsByTagName(`main`));
 main[0].innerHTML = ``;
 
-let xhr = new XMLHttpRequest();
-xhr.open(`POST`, `http://f0769682.xsph.ru/`);
-xhr.setRequestHeader(`Content-type`, `application/x-www-form-urlencoded`);
+SendRequest(`POST`, `http://f0769682.xsph.ru/`, `event=update`, handlerDataMain);
 
-xhr.responseType = `json`;
-xhr.send(`event=update`);
-xhr.addEventListener(`load`, () => {
-	let data = xhr.response;
+function SendRequest(metod, path, arg, callback) {
+	let request = new XMLHttpRequest();
+	request.open(metod, path);
+	request.setRequestHeader(`Content-type`, `application/x-www-form-urlencoded`);
+	request.responseType = `json`;
+	request.send(arg);
+	request.addEventListener(`load`, () => callback(request));
+}
+
+function handlerDataMain(request) {
+	let data = request.response;
 	buildData(data);
 
 	const seanceButtons = Array.from(document.querySelectorAll(`.movie-seances__time`));
@@ -27,24 +32,14 @@ xhr.addEventListener(`load`, () => {
 			let dateNow = new Date();
 			let timestamp = Date.parse(`${dateNow.getFullYear()}-${dateNow.getMonth()}-${day} ${timeSeances[0].seance_time}`) / 1000;
 
-			console.log(timeSeances[0].seance_hallid);
-			console.log(timeSeances[0].seance_id);
-			console.log(timestamp);
+			SendRequest(`POST`, `http://f0769682.xsph.ru/`, `event=get_hallConfig&timestamp=${timestamp}&hallId=${timeSeances[0].seance_hallid}&seanceId=${timeSeances[0].seance_id}`, handlerDataHall);
 
-			let xhrHall = new XMLHttpRequest();
-			xhrHall.open(`POST`, `http://f0769682.xsph.ru/`);
-			xhrHall.setRequestHeader(`Content-type`, `application/x-www-form-urlencoded`);
-			xhrHall.responseType = `json`;
-			xhrHall.send(`event=get_hallConfig&timestamp=${timestamp}&hallId=${timeSeances[0].seance_hallid}&seanceId=${timeSeances[0].seance_id}`);
-	 		xhrHall.addEventListener(`load`, () => {
-	 			let hallScheme = xhrHall.response;
-	 			console.log(hallScheme);
-	 		});
+	 		// 	let hallScheme = xhrHall.response;
 
 	 		return false;
 	 	});
 	}
-});
+} 
 
 
 function buildData(data) {
