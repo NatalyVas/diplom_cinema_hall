@@ -1,16 +1,3 @@
-const main = Array.from(document.getElementsByTagName(`main`));
-main[0].innerHTML = ``;
-
-SendRequest(`POST`, `http://f0769682.xsph.ru/`, `event=update`, handlerDataMain);
-
-function SendRequest(metod, path, arg, callback) {
-	let request = new XMLHttpRequest();
-	request.open(metod, path);
-	request.setRequestHeader(`Content-type`, `application/x-www-form-urlencoded`);
-	request.responseType = `json`;
-	request.send(arg);
-	request.addEventListener(`load`, () => callback(request));
-}
 
 function handlerDataMain(request) {
 	let data = request.response;
@@ -19,7 +6,7 @@ function handlerDataMain(request) {
 	const seanceButtons = Array.from(document.querySelectorAll(`.movie-seances__time`));
 	for (let button of seanceButtons) {
 	 	button.addEventListener(`click`, () => {
-	 		event.preventDefault();
+	 		//event.preventDefault();
 
 	 		let timeSeances = data.seances.result.filter(item => item.seance_time === button.textContent);
 	 		let numberHall = button.closest(`.movie-seances__hall`).querySelector(`.movie-seances__hall-title`).textContent.slice(4);
@@ -32,11 +19,21 @@ function handlerDataMain(request) {
 			let dateNow = new Date();
 			let timestamp = Date.parse(`${dateNow.getFullYear()}-${dateNow.getMonth()}-${day} ${timeSeances[0].seance_time}`) / 1000;
 
-			SendRequest(`POST`, `http://f0769682.xsph.ru/`, `event=get_hallConfig&timestamp=${timestamp}&hallId=${timeSeances[0].seance_hallid}&seanceId=${timeSeances[0].seance_id}`, handlerDataHall);
+			SendRequest(`POST`, `https://jscp-diplom.tw1.ru/`, `event=get_hallConfig&timestamp=${timestamp}&hallId=${timeSeances[0].seance_hallid}&seanceId=${timeSeances[0].seance_id}`, handlerDataHall);
 
-	 		// 	let hallScheme = xhrHall.response;
+	 		function handlerDataHall(request) {
+	 			let hallScheme = request.response;
+	 			let dataAll = [];
+	 			dataAll.push(data);
+	 			dataAll.push(hallScheme);
+	 			dataAll.push(numberHall);
+	 			dataAll.push(timestamp);
+	 			dataAll.push(timeSeances[0].seance_hallid);
+	 			dataAll.push(timeSeances[0].seance_id);
+	 			localStorage.setItem(`cinema`, JSON.stringify(dataAll));
+	 		}
 
-	 		return false;
+	 		//return false;
 	 	});
 	}
 } 
