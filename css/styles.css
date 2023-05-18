@@ -449,9 +449,9 @@ body {
  pointer-events: none
 }
 
-/*.acceptin-button:disabled {
+.acceptin-button:disabled {
   background-color: #888888;
   pointer-events: none
- }*/
+ }
 
 

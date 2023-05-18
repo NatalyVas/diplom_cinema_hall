@@ -1,3 +1,4 @@
+console.log(JSON.parse(localStorage.getItem(`cinema`)));
 let hall = JSON.parse(localStorage.getItem(`cinema`))[1];
 const number = JSON.parse(localStorage.getItem(`cinema`))[2] - 1;
 const hallPlan = document.querySelector(`.conf-step__wrapper`);
@@ -5,13 +6,16 @@ const hallPlan = document.querySelector(`.conf-step__wrapper`);
 if (JSON.parse(localStorage.getItem(`cinema`))[0].halls.result[number].hall_open === 0) {
 	hallPlan.innerHTML = ``;
 } else {
-	if (hall === null) {
-		hall = JSON.parse(localStorage.getItem(`cinema`))[0].halls.result[number].hall_config;
-		hallPlan.innerHTML = hall;
-	} else {
-		hallPlan.innerHTML = hall;
-	}
+	hallPlan.innerHTML = hall;
 }
+// else {
+// 	if (hall === null) {
+// 		hall = JSON.parse(localStorage.getItem(`cinema`))[0].halls.result[number].hall_config;
+// 		hallPlan.innerHTML = hall;
+// 	} else {
+// 		hallPlan.innerHTML = hall;
+// 	}
+// }
 
 const chairForСhoice = Array.from(document.querySelectorAll(`.conf-step__chair_standart, .conf-step__chair_vip`));
 for (let chair of chairForСhoice) {
@@ -42,7 +46,7 @@ const seance_id = JSON.parse(localStorage.getItem(`cinema`))[5];
 acceptinButton.addEventListener(`click`, () => {
 	const hallConfiguration = document.querySelector(`.conf-step__wrapper`);
 
-	SendRequest(`POST`, `https://jscp-diplom.tw1.ru/`, `event=sale_add&timestamp=${timestramp}&hallId=${hall_id}&seanceId=${seance_id}&hallConfiguration=${hallConfiguration}`, chairDetails);
+	SendRequest(`POST`, `https://jscp-diplom.netoserver.ru/`, `event=sale_add&timestamp=${timestramp}&hallId=${hall_id}&seanceId=${seance_id}&hallConfiguration=${hallConfiguration}`, chairDetails);
 	
 	function chairDetails() {
 		let selected = Array.from(document.querySelectorAll(`.conf-step__chair_selected`));

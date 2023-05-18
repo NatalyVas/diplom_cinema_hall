@@ -1,5 +1,5 @@
 const dataAll = JSON.parse(localStorage.getItem(`cinema`));
-console.log(dataAll);
+//console.log(dataAll);
 const data = dataAll[0];
 const seanceId = dataAll[5];
 

@@ -19,17 +19,21 @@ function handlerDataMain(request) {
 			let dateNow = new Date();
 			let timestamp = Date.parse(`${dateNow.getFullYear()}-${dateNow.getMonth()}-${day} ${timeSeances[0].seance_time}`) / 1000;
 
-			SendRequest(`POST`, `https://jscp-diplom.tw1.ru/`, `event=get_hallConfig&timestamp=${timestamp}&hallId=${timeSeances[0].seance_hallid}&seanceId=${timeSeances[0].seance_id}`, handlerDataHall);
+			SendRequest(`POST`, `https://jscp-diplom.netoserver.ru/`, `event=get_hallConfig&timestamp=${timestamp}&hallId=${timeSeances[0].seance_hallid}&seanceId=${timeSeances[0].seance_id}`, handlerDataHall);
 
 	 		function handlerDataHall(request) {
 	 			let hallScheme = request.response;
 	 			let dataAll = [];
 	 			dataAll.push(data);
-	 			dataAll.push(hallScheme);
+	 			if (hallScheme === null) {
+					hallScheme = data.halls.result[numberHall].hall_config;
+				}
+				dataAll.push(hallScheme);
 	 			dataAll.push(numberHall);
 	 			dataAll.push(timestamp);
 	 			dataAll.push(timeSeances[0].seance_hallid);
 	 			dataAll.push(timeSeances[0].seance_id);
+	 			//console.log(dataAll);
 	 			localStorage.setItem(`cinema`, JSON.stringify(dataAll));
 	 		}
 
