@@ -51,7 +51,7 @@ acceptinButton.addEventListener(`click`, () => {
 	function chairDetails() {
 		let selected = Array.from(document.querySelectorAll(`.conf-step__chair_selected`));
 		let chairs = selected.slice(0, -1);
-		//console.log(chairs);
+		console.log(chairs);
 		let chairPlaces = [];
 
 		for (let chair of chairs) {
