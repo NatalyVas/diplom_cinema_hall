@@ -1,6 +1,7 @@
 
 function handlerDataMain(request) {
 	let data = request.response;
+	console.log(data);
 	buildData(data);
 
 	const seanceButtons = Array.from(document.querySelectorAll(`.movie-seances__time`));
