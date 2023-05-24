@@ -1,8 +1,8 @@
 
 function handlerDataMain(request) {
 	let data = request.response;
-	console.log(data.halls.result[0].hall_open);
-	console.log(data.halls.result[0].hall_config);
+	//console.log(data.halls.result[0].hall_open);
+	//console.log(data.halls.result[0].hall_config);
 	buildData(data);
 
 	const seanceButtons = Array.from(document.querySelectorAll(`.movie-seances__time`));
@@ -31,8 +31,10 @@ function handlerDataMain(request) {
 	 			let dataAll = [];
 	 			dataAll.push(data);
 	 			if (hallScheme === null) {
-					hallScheme = data.halls.result[parseInt(numberHall)].hall_config;
+					hallScheme = data.halls.result[parseInt(numberHall) - 1].hall_config;
+
 				}
+				console.log(hallScheme);
 				dataAll.push(hallScheme);
 	 			dataAll.push(numberHall);
 	 			dataAll.push(timestamp);
