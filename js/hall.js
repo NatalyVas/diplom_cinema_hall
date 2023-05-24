@@ -44,7 +44,7 @@ const hall_id = JSON.parse(localStorage.getItem(`cinema`))[4];
 const seance_id = JSON.parse(localStorage.getItem(`cinema`))[5];
 
 acceptinButton.addEventListener(`click`, () => {
-	const hallConfiguration = document.querySelector(`.conf-step__wrapper`);
+	const hallConfiguration = document.querySelector(`.conf-step__wrapper`).innerHTML;
 
 	SendRequest(`POST`, `https://jscp-diplom.netoserver.ru/`, `event=sale_add&timestamp=${timestramp}&hallId=${hall_id}&seanceId=${seance_id}&hallConfiguration=${hallConfiguration}`, chairDetails);
 	
@@ -70,7 +70,6 @@ acceptinButton.addEventListener(`click`, () => {
 			chairPlaces.push(chairPlace);
 		}
 		let storage = JSON.parse(localStorage.getItem(`cinema`)).push(chairPlaces);
-		//console.log(storage);
 		localStorage.setItem(`cinema`, JSON.stringify(storage));
 	}
 });
