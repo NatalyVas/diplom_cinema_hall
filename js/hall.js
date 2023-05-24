@@ -71,8 +71,6 @@ acceptinButton.addEventListener(`click`, () => {
 		}
 		let storage = JSON.parse(localStorage.getItem(`cinema`));
 		storage.push(chairPlaces);
-		console.log(storage);
-		//let storage = JSON.parse(localStorage.getItem(`cinema`)).push(chairPlaces);
 		localStorage.setItem(`cinema`, JSON.stringify(storage));
 	}
 });
