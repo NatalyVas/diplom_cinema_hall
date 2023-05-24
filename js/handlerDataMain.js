@@ -1,7 +1,8 @@
 
 function handlerDataMain(request) {
 	let data = request.response;
-	console.log(data);
+	console.log(data.halls.result[0].hall_open);
+	console.log(data.halls.result[0].hall_config);
 	buildData(data);
 
 	const seanceButtons = Array.from(document.querySelectorAll(`.movie-seances__time`));
