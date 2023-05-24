@@ -6,8 +6,11 @@ function handlerDataMain(request) {
 	const seanceButtons = Array.from(document.querySelectorAll(`.movie-seances__time`));
 	for (let button of seanceButtons) {
 	 	button.addEventListener(`click`, () => {
-	 		//event.preventDefault();
+	 		event.preventDefault();
+	 		let timeStart = button.textContent;
+	 		let title = button.closest(`.movie-seances__hall`).closest(`.movie`).querySelector(`.movie__title`).textContent;
 
+	 		
 	 		let timeSeances = data.seances.result.filter(item => item.seance_time === button.textContent);
 	 		let numberHall = button.closest(`.movie-seances__hall`).querySelector(`.movie-seances__hall-title`).textContent.slice(4);
 
@@ -33,11 +36,13 @@ function handlerDataMain(request) {
 	 			dataAll.push(timestamp);
 	 			dataAll.push(timeSeances[0].seance_hallid);
 	 			dataAll.push(timeSeances[0].seance_id);
+	 			dataAll.push(timeStart);
+	 			dataAll.push(title);
 	 			//console.log(dataAll);
 	 			localStorage.setItem(`cinema`, JSON.stringify(dataAll));
 	 		}
 
-	 		//return false;
+	 		return false;
 	 	});
 	}
 } 
