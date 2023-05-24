@@ -13,10 +13,9 @@ function handlerDataMain(request) {
 	 		
 	 		let timeSeances = data.seances.result.filter(item => item.seance_time === button.textContent);
 	 		let numberHall = button.closest(`.movie-seances__hall`).querySelector(`.movie-seances__hall-title`).textContent.slice(4);
-	 		numberHall = parseInt(numberHall) - 1;
 
 	 		timeSeances.find(item => {
-	 			data.halls.result.find(el => el.hall_id === item.seance_hallid).hall_name.slice(3) === String(numberHall);
+	 			data.halls.result.find(el => el.hall_id === item.seance_hallid).hall_name.slice(3) === numberHall;
 	 		});
 
 			let day = document.querySelector(`.page-nav__day_chosen`).querySelector(`.page-nav__day-number`).textContent;
@@ -30,7 +29,7 @@ function handlerDataMain(request) {
 	 			let dataAll = [];
 	 			dataAll.push(data);
 	 			if (hallScheme === null) {
-					hallScheme = data.halls.result[numberHall].hall_config;
+					hallScheme = data.halls.result[parseInt(numberHall)].hall_config;
 				}
 				dataAll.push(hallScheme);
 	 			dataAll.push(numberHall);

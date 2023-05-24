@@ -4,7 +4,7 @@ titleMovie.textContent = JSON.parse(localStorage.getItem(`cinema`))[7];
 const timeMovie = document.querySelector(`.buying__info-start`);
 timeMovie.textContent = `Начало сеанса: ${JSON.parse(localStorage.getItem(`cinema`))[6]}`
 
-const number = JSON.parse(localStorage.getItem(`cinema`))[2] - 1;
+const number = JSON.parse(localStorage.getItem(`cinema`))[2];
 const numberHall = document.querySelector(`.buying__info-hall`);
 numberHall.textContent = `Зал ${number}`
 
