@@ -2,11 +2,11 @@
 const titleMovie = document.querySelector(`.buying__info-title`);
 titleMovie.textContent = JSON.parse(localStorage.getItem(`cinema`))[7]; 
 const timeMovie = document.querySelector(`.buying__info-start`);
-timeMovie = `Начало сеанса: ${JSON.parse(localStorage.getItem(`cinema`))[6]}`
+timeMovie.textContent = `Начало сеанса: ${JSON.parse(localStorage.getItem(`cinema`))[6]}`
 
 const number = JSON.parse(localStorage.getItem(`cinema`))[2] - 1;
 const numberHall = document.querySelector(`.buying__info-hall`);
-numberHall = `Зал ${number}`
+numberHall.textContent = `Зал ${number}`
 
 let hall = JSON.parse(localStorage.getItem(`cinema`))[1];
 const hallPlan = document.querySelector(`.conf-step__wrapper`);
@@ -16,14 +16,6 @@ if (JSON.parse(localStorage.getItem(`cinema`))[0].halls.result[number].hall_open
 } else {
 	hallPlan.innerHTML = hall;
 }
-// else {
-// 	if (hall === null) {
-// 		hall = JSON.parse(localStorage.getItem(`cinema`))[0].halls.result[number].hall_config;
-// 		hallPlan.innerHTML = hall;
-// 	} else {
-// 		hallPlan.innerHTML = hall;
-// 	}
-// }
 
 const chairForСhoice = Array.from(document.querySelectorAll(`.conf-step__chair_standart, .conf-step__chair_vip`));
 for (let chair of chairForСhoice) {
@@ -52,7 +44,6 @@ const hall_id = JSON.parse(localStorage.getItem(`cinema`))[4];
 const seance_id = JSON.parse(localStorage.getItem(`cinema`))[5];
 
 acceptinButton.addEventListener(`click`, () => {
-	//event.preventDefault();
 	const hallConfiguration = document.querySelector(`.conf-step__wrapper`);
 
 	SendRequest(`POST`, `https://jscp-diplom.netoserver.ru/`, `event=sale_add&timestamp=${timestramp}&hallId=${hall_id}&seanceId=${seance_id}&hallConfiguration=${hallConfiguration}`, chairDetails);
@@ -60,22 +51,23 @@ acceptinButton.addEventListener(`click`, () => {
 	function chairDetails() {
 		let selected = Array.from(document.querySelectorAll(`.conf-step__chair_selected`));
 		let chairs = selected.slice(0, -1);
-		console.log(chairs);
+		//console.log(chairs);
+		let chairPlaces = [];
 
 		for (let chair of chairs) {
+			let chairPlace;
 			let sites = Array.from(chair.closest(`.conf-step__row`).children);
 			let index = sites.indexOf(chair);
-			chair.site = index + 1;
+			chairPlace.site = index + 1;
 
 			let row = chair.closest(`.conf-step__row`);
 			let rows = Array.from(row.closest(`.conf-step__wrapper`).children);
 			let indexRow = rows.indexOf(row);
-			chair.row = indexRow + 1;
-			
-			// бронируем одно место
-			let storage = JSON.parse(localStorage.getItem(`cinema`)).push(chair);
-			localStorage.setItem(`cinema`, JSON.stringify(storage));
+			chairPlace.row = indexRow + 1;
+
+			chairPlaces.push(chairPlace);
 		}
+		let storage = JSON.parse(localStorage.getItem(`cinema`)).push(chairPlaces);
+		localStorage.setItem(`cinema`, JSON.stringify(storage));
 	}
-	//return false;
 });
