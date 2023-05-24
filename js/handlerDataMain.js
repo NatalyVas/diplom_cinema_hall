@@ -27,7 +27,7 @@ function handlerDataMain(request) {
 			SendRequest(`POST`, `https://jscp-diplom.netoserver.ru/`, `event=get_hallConfig&timestamp=${timestamp}&hallId=${timeSeances[0].seance_hallid}&seanceId=${timeSeances[0].seance_id}`, handlerDataHall);
 
 	 		function handlerDataHall(request) {
-	 			let hallScheme = request.response;
+	 			let hallScheme = request.response.innerHTML;
 	 			console.log(hallScheme);
 	 			let dataAll = [];
 	 			dataAll.push(data);
