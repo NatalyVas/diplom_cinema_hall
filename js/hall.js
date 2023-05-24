@@ -71,7 +71,7 @@ acceptinButton.addEventListener(`click`, () => {
 		}
 		let storage = JSON.parse(localStorage.getItem(`cinema`));
 		console.log(storage);
-		storage.push(chairPlace);
+		storage.push(chairPlaces);
 		console.log(storage);
 		//let storage = JSON.parse(localStorage.getItem(`cinema`)).push(chairPlaces);
 		//localStorage.setItem(`cinema`, JSON.stringify(storage));
