@@ -61,9 +61,10 @@ acceptinButton.addEventListener(`click`, () => {
 			let rows = Array.from(row.closest(`.conf-step__wrapper`).children);
 			let indexRow = rows.indexOf(row);
 			chair.row = indexRow + 1;
-			// console.log(chair.row);
-
+			
+			// бронируем одно место
 			let storage = JSON.parse(localStorage.getItem(`cinema`)).push(chair);
+			console.log(storage);
 			localStorage.setItem(`cinema`, JSON.stringify(storage));
 		}
 	}

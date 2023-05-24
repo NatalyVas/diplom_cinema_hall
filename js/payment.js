@@ -20,7 +20,8 @@ let textChairs = ``;
 for (let chair of dataAll[6]) {
 	textChairs = textChairs + chair.row + `/` + chair.site + `, `;
 }
-сhairs = textChairs.slice(0, -2);
+//chairs??
+let сhairs = textChairs.slice(0, -2);
 ticketChairs.textContent = сhairs;
 
 const ticketHall = document.querySelector(`.ticket__hall`);
