@@ -6,7 +6,7 @@ function handlerDataMain(request) {
 	const seanceButtons = Array.from(document.querySelectorAll(`.movie-seances__time`));
 	for (let button of seanceButtons) {
 	 	button.addEventListener(`click`, () => {
-	 		event.preventDefault();
+	 		//event.preventDefault();
 	 		let timeStart = button.textContent;
 	 		let title = button.closest(`.movie-seances__hall`).closest(`.movie`).querySelector(`.movie__title`).textContent;
 
@@ -42,7 +42,7 @@ function handlerDataMain(request) {
 	 			localStorage.setItem(`cinema`, JSON.stringify(dataAll));
 	 		}
 
-	 		return false;
+	 		//return false;
 	 	});
 	}
 } 
