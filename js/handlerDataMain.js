@@ -26,34 +26,40 @@ function handlerDataMain(request) {
 
 	 		function handlerDataHall(request) {
 	 			let hallScheme = request.response;
-
-	 			let dataAll = [];
-	 			dataAll.push(data);
 	 			if (hallScheme === null) {
 					hallScheme = data.halls.result[parseInt(numberHall) - 1].hall_config;
 				}
-				dataAll.push(hallScheme);
-	 			dataAll.push(numberHall);
-	 			dataAll.push(timestamp);
-	 			dataAll.push(timeSeances[0].seance_hallid);
-	 			dataAll.push(timeSeances[0].seance_id);
-	 			dataAll.push(timeStart);
-	 			dataAll.push(title);
-	 			localStorage.setItem(`cinema`, JSON.stringify(dataAll));
+
+	 			let storage = {
+	 				data: data,
+	 				hallScheme: hallScheme,
+	 				numberHall: numberHall,
+	 				timestamp: timestamp,
+	 				hallId: timeSeances[0].seance_hallid,
+	 				seanceId: timeSeances[0].seance_id,
+	 				timeStart: timeStart,
+	 				title: title,
+	 				chairs: "",
+	 				QRcode: ""
+	 			}
+
+	 			//let dataAll = [];
+	 			// dataAll.push(data);
+				// dataAll.push(hallScheme);
+	 			// dataAll.push(numberHall);
+	 			// dataAll.push(timestamp);
+	 			// dataAll.push(timeSeances[0].seance_hallid);
+	 			// dataAll.push(timeSeances[0].seance_id);
+	 			// dataAll.push(timeStart);
+	 			// dataAll.push(title);
+	 			localStorage.setItem(`cinema`, JSON.stringify(storage));
 	 		}
 	 			window.setTimeout(() => {
 	 				let link = document.createElement(`a`);
 	 				link.href = `hall.html`;
 					link.click();
-	 			}, 100);
+	 			}, 1000);
 
-	 		//let link = document.createElement(`a`);
-			// const fake = document.querySelector(`.movie`);
-			// fake.appendChild(link);
-			// fake.style.display = `none`;
-			//link.href = `hall.html`;
-			//link.click();
-	 		//call();
 	 	});
 	}
 } 

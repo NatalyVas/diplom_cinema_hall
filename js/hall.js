@@ -1,17 +1,16 @@
-//console.log(JSON.parse(localStorage.getItem(`cinema`)));
 const titleMovie = document.querySelector(`.buying__info-title`);
-titleMovie.textContent = JSON.parse(localStorage.getItem(`cinema`))[7]; 
+titleMovie.textContent = JSON.parse(localStorage.getItem(`cinema`)).title; 
 const timeMovie = document.querySelector(`.buying__info-start`);
-timeMovie.textContent = `Начало сеанса: ${JSON.parse(localStorage.getItem(`cinema`))[6]}`
+timeMovie.textContent = `Начало сеанса: ${JSON.parse(localStorage.getItem(`cinema`)).timeStart}`
 
-const number = JSON.parse(localStorage.getItem(`cinema`))[2];
+const number = JSON.parse(localStorage.getItem(`cinema`)).numberHall;
 const numberHall = document.querySelector(`.buying__info-hall`);
 numberHall.textContent = `Зал ${number}`
 
-let hall = JSON.parse(localStorage.getItem(`cinema`))[1];
+let hall = JSON.parse(localStorage.getItem(`cinema`)).hallScheme;
 const hallPlan = document.querySelector(`.conf-step__wrapper`);
 
-if (JSON.parse(localStorage.getItem(`cinema`))[0].halls.result[number].hall_open === 0) {
+if (JSON.parse(localStorage.getItem(`cinema`)).data.halls.result[number].hall_open === 0) {
 	hallPlan.innerHTML = ``;
 } else {
 	hallPlan.innerHTML = hall;
@@ -39,9 +38,9 @@ for (let chair of chairForСhoice) {
  }
 
 const acceptinButton = document.querySelector(`.acceptin-button`);
-const timestramp = JSON.parse(localStorage.getItem(`cinema`))[3];
-const hall_id = JSON.parse(localStorage.getItem(`cinema`))[4];
-const seance_id = JSON.parse(localStorage.getItem(`cinema`))[5];
+const timestramp = JSON.parse(localStorage.getItem(`cinema`)).timestamp;
+const hall_id = JSON.parse(localStorage.getItem(`cinema`)).hallId;
+const seance_id = JSON.parse(localStorage.getItem(`cinema`)).seanceId;
 
 acceptinButton.addEventListener(`click`, () => {
 	const hallConfiguration = document.querySelector(`.conf-step__wrapper`).innerHTML;
@@ -70,13 +69,14 @@ acceptinButton.addEventListener(`click`, () => {
 			chairPlaces.push(chairPlace);
 		}
 			let storage = JSON.parse(localStorage.getItem(`cinema`));
-			storage.push(chairPlaces);
+			storage.chairs = chairPlaces;
+			//storage.push(chairPlaces);
 			localStorage.setItem(`cinema`, JSON.stringify(storage));
 
 			window.setTimeout(() => {
 				let link = document.createElement(`a`);
 	 			link.href = `payment.html`;
 				link.click();
-	 		}, 100);
+	 		}, 1000);
 	}
 });
