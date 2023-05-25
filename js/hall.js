@@ -69,6 +69,7 @@ acceptinButton.addEventListener(`click`, () => {
 
 			chairPlaces.push(chairPlace);
 		}
+		
 		let storage = JSON.parse(localStorage.getItem(`cinema`));
 		storage.push(chairPlaces);
 		localStorage.setItem(`cinema`, JSON.stringify(storage));

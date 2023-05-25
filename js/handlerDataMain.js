@@ -1,14 +1,12 @@
 
 function handlerDataMain(request) {
 	let data = request.response;
-	//console.log(data.halls.result[0].hall_open);
-	//console.log(data.halls.result[0].hall_config);
 	buildData(data);
 
 	const seanceButtons = Array.from(document.querySelectorAll(`.movie-seances__time`));
 	for (let button of seanceButtons) {
 	 	button.addEventListener(`click`, () => {
-	 		//event.preventDefault();
+	 		event.preventDefault();
 	 		let timeStart = button.textContent;
 	 		let title = button.closest(`.movie-seances__hall`).closest(`.movie`).querySelector(`.movie__title`).textContent;
 
@@ -27,7 +25,6 @@ function handlerDataMain(request) {
 			SendRequest(`POST`, `https://jscp-diplom.netoserver.ru/`, `event=get_hallConfig&timestamp=${timestamp}&hallId=${timeSeances[0].seance_hallid}&seanceId=${timeSeances[0].seance_id}`, handlerDataHall);
 
 	 		function handlerDataHall(request) {
-	 			console.log(request);
 	 			let hallScheme = request.response;
 
 	 			let dataAll = [];
@@ -42,11 +39,9 @@ function handlerDataMain(request) {
 	 			dataAll.push(timeSeances[0].seance_id);
 	 			dataAll.push(timeStart);
 	 			dataAll.push(title);
-	 			//console.log(dataAll);
 	 			localStorage.setItem(`cinema`, JSON.stringify(dataAll));
 	 		}
-
-	 		//return false;
+	 		call();
 	 	});
 	}
 } 
