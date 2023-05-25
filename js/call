@@ -1,7 +1,0 @@
-function call() {
-	let link = document.createElement(`a`);
-	link.href = `../hall.html`;
-	console.log(`kjkhkjh`);
-	//console.log(link);
-	link.click();
-}
