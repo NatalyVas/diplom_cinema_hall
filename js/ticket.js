@@ -11,4 +11,4 @@ document.querySelector(`.ticket__chairs`).textContent = сhairs;
 document.querySelector(`.ticket__hall`).textContent = dataAll[2];
 document.querySelector(`.ticket__start`).textContent = dataAll[6];
 
-document.getElementById('qrcode').append(dataAll[9]);
+document.getElementById('qrcode').append(QRCreator(dataAll[9]).result);

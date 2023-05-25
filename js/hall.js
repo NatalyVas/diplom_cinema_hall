@@ -69,9 +69,14 @@ acceptinButton.addEventListener(`click`, () => {
 
 			chairPlaces.push(chairPlace);
 		}
-		
-		let storage = JSON.parse(localStorage.getItem(`cinema`));
-		storage.push(chairPlaces);
-		localStorage.setItem(`cinema`, JSON.stringify(storage));
+			let storage = JSON.parse(localStorage.getItem(`cinema`));
+			storage.push(chairPlaces);
+			localStorage.setItem(`cinema`, JSON.stringify(storage));
+
+			window.setTimeout(() => {
+				let link = document.createElement(`a`);
+	 			link.href = `payment.html`;
+				link.click();
+	 		}, 100);
 	}
 });

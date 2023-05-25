@@ -41,7 +41,19 @@ function handlerDataMain(request) {
 	 			dataAll.push(title);
 	 			localStorage.setItem(`cinema`, JSON.stringify(dataAll));
 	 		}
-	 		call();
+	 			window.setTimeout(() => {
+	 				let link = document.createElement(`a`);
+	 				link.href = `hall.html`;
+					link.click();
+	 			}, 100);
+
+	 		//let link = document.createElement(`a`);
+			// const fake = document.querySelector(`.movie`);
+			// fake.appendChild(link);
+			// fake.style.display = `none`;
+			//link.href = `hall.html`;
+			//link.click();
+	 		//call();
 	 	});
 	}
 } 

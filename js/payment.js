@@ -14,8 +14,13 @@ document.querySelector(`.ticket__start`).textContent = dataAll[6];
 const acceptinButton = document.querySelector(`.acceptin-button`);
 
 acceptinButton.addEventListener(`click`, () => {
-	let textForCoding = `${dataAll[7]} + ${dataAll[5]} + ${сhairs}`;
-	let code = QRCreator(textForCoding).result;
-	dataAll.push(code);
+	let textForCoding = `${dataAll[7]} ${dataAll[5]} ${сhairs}`;
+	dataAll.push(textForCoding);
 	localStorage.setItem(`cinema`, JSON.stringify(dataAll));
+
+	window.setTimeout(() => {
+		let link = document.createElement(`a`);
+	 	link.href = `ticket.html`;
+		link.click();
+	 }, 100);	
 });
