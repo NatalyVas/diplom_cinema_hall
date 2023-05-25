@@ -77,6 +77,6 @@ acceptinButton.addEventListener(`click`, () => {
 				let link = document.createElement(`a`);
 	 			link.href = `payment.html`;
 				link.click();
-	 		}, 1000);
+	 		}, 500);
 	}
 });

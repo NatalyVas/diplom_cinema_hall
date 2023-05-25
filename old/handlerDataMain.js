@@ -49,7 +49,7 @@ function handlerDataMain(request) {
 	 				let link = document.createElement(`a`);
 	 				link.href = `hall.html`;
 					link.click();
-	 			}, 500);
+	 			}, 1000);
 	 	});
 	}
 } 
