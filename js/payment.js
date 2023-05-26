@@ -11,9 +11,7 @@ acceptinButton.addEventListener(`click`, () => {
 
 	localStorage.setItem(`cinema`, JSON.stringify(storage));
 
-	window.setTimeout(() => {
-		let link = document.createElement(`a`);
-	 	link.href = `ticket.html`;
-		link.click();
-	 }, 500);	
+	let link = document.createElement(`a`);
+	link.href = `ticket.html`;
+	link.click();
 });

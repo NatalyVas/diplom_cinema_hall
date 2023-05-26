@@ -44,12 +44,11 @@ function handlerDataMain(request) {
 	 			}
 
 	 			localStorage.setItem(`cinema`, JSON.stringify(storage));
+
+	 			let link = document.createElement(`a`);
+	 			link.href = `hall.html`;
+	 			link.click();
 	 		}
-	 			window.setTimeout(() => {
-	 				let link = document.createElement(`a`);
-	 				link.href = `hall.html`;
-					link.click();
-	 			}, 500);
 	 	});
 	}
 } 

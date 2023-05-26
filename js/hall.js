@@ -72,10 +72,8 @@ acceptinButton.addEventListener(`click`, () => {
 			storage.chairs = chairPlaces;
 			localStorage.setItem(`cinema`, JSON.stringify(storage));
 
-			window.setTimeout(() => {
-				let link = document.createElement(`a`);
-	 			link.href = `payment.html`;
-				link.click();
-	 		}, 500);
+			let link = document.createElement(`a`);
+	 		link.href = `payment.html`;
+			link.click();
 	}
 });
