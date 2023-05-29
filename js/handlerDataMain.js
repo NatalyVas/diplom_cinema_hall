@@ -3,6 +3,14 @@ function handlerDataMain(request) {
 	let data = request.response;
 	buildData(data);
 
+	let storage = JSON.parse(localStorage.getItem(`cinema`));
+	let date = {
+		day: storage.slice(8, 10),
+		month: storage.slice(5, 7),
+		year: storage.slice(0, 4)
+	}
+
+
 	const seanceButtons = Array.from(document.querySelectorAll(`.movie-seances__time`));
 	for (let button of seanceButtons) {
 	 	button.addEventListener(`click`, () => {
@@ -18,10 +26,8 @@ function handlerDataMain(request) {
 	 			data.halls.result.find(el => el.hall_id === item.seance_hallid).hall_name.slice(3) === numberHall;
 	 		});
 
-			let day = document.querySelector(`.page-nav__day_chosen`).querySelector(`.page-nav__day-number`).textContent;
-			let dateNow = new Date();
-			let timestamp = Date.parse(`${dateNow.getFullYear()}-${dateNow.getMonth()}-${day} ${timeSeances[0].seance_time}`) / 1000;
-
+			let timestamp = Date.parse(`${date.year}-${date.month}-${date.day} ${timeSeances[0].seance_time}`) / 1000;
+			
 			SendRequest(`POST`, `https://jscp-diplom.netoserver.ru/`, `event=get_hallConfig&timestamp=${timestamp}&hallId=${timeSeances[0].seance_hallid}&seanceId=${timeSeances[0].seance_id}`, handlerDataHall);
 
 	 		function handlerDataHall(request) {
@@ -40,7 +46,8 @@ function handlerDataMain(request) {
 	 				timeStart: timeStart,
 	 				title: title,
 	 				chairs: "",
-	 				QRcode: ""
+	 				QRcode: "",
+	 				date: date
 	 			}
 
 	 			localStorage.setItem(`cinema`, JSON.stringify(storage));
