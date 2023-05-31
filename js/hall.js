@@ -10,7 +10,7 @@ numberHall.textContent = `Зал ${number}`
 let hall = JSON.parse(localStorage.getItem(`cinema`)).hallScheme;
 const hallPlan = document.querySelector(`.conf-step__wrapper`);
 
-if (JSON.parse(localStorage.getItem(`cinema`)).data.halls.result[number].hall_open === 0) {
+if (JSON.parse(localStorage.getItem(`cinema`)).data.halls.result[number - 1].hall_open === `0`) {
 	hallPlan.innerHTML = ``;
 } else {
 	hallPlan.innerHTML = hall;

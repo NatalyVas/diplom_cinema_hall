@@ -27,9 +27,6 @@ for (let i = 0; i < nav.length; i++) {
 		now.getFullYear(), 
 		now.getMonth(),
 		now.getDate() + i,
-		now.getHours(),
-		now.getMinutes(),
-		now.getSeconds(),
 	);
 	let dateForNav = {
 		week: date.toLocaleDateString('ru-RU', options).slice(0, 2),
@@ -38,6 +35,9 @@ for (let i = 0; i < nav.length; i++) {
 
 	nav[i].querySelector(`.page-nav__day-week`).textContent = dateForNav.week;
 	nav[i].querySelector(`.page-nav__day-number`).textContent = dateForNav.day;
+
+	nav[i].dataset.timestamp = Date.parse(`${date.getFullYear()}.${date.getMonth()}.${date.getDate()} 00:00:00`)/1000; 
+
 	if (dateForNav.week === `сб` || dateForNav.week === `вс`) {
 		nav[i].classList.add(`page-nav__day_weekend`);
 	}

@@ -13,8 +13,16 @@ function handlerDataMain(request) {
 
 	const seanceButtons = Array.from(document.querySelectorAll(`.movie-seances__time`));
 	for (let button of seanceButtons) {
+
 	 	button.addEventListener(`click`, () => {
 	 		event.preventDefault();
+	 		if (nav[0].classList.contains(`page-nav__day_chosen`)) {
+	 			let timeNow = now.getHours() * 60 + now.getMinutes();
+	 			if (parseInt(button.textContent.slice(0,2)) * 60 + parseInt(button.textContent.slice(3)) <= timeNow) {
+	 				return false;
+	 			}
+	 		}
+
 	 		let timeStart = button.textContent;
 	 		let title = button.closest(`.movie-seances__hall`).closest(`.movie`).querySelector(`.movie__title`).textContent;
 
@@ -26,7 +34,8 @@ function handlerDataMain(request) {
 	 			data.halls.result.find(el => el.hall_id === item.seance_hallid).hall_name.slice(3) === numberHall;
 	 		});
 
-			let timestamp = Date.parse(`${date.year}-${date.month}-${date.day} ${timeSeances[0].seance_time}`) / 1000;
+			let index = nav.findIndex(el => el.classList.contains(`page-nav__day_chosen`));
+			timestamp = parseInt(button.dataset.timestamp) + parseInt(nav[index].dataset.timestamp);
 			
 			SendRequest(`POST`, `https://jscp-diplom.netoserver.ru/`, `event=get_hallConfig&timestamp=${timestamp}&hallId=${timeSeances[0].seance_hallid}&seanceId=${timeSeances[0].seance_id}`, handlerDataHall);
 
@@ -136,8 +145,9 @@ function buildData(data) {
 					let movieSeancesTime = document.createElement(`a`);
 					movieSeancesTime.classList.add(`movie-seances__time`);
 					movieSeancesTime.href = "hall.html";
-					//movieSeancesTime.href = "";
 					movieSeancesTime.textContent = data.halls.result[j].seance[x].seance_time;
+
+					movieSeancesTime.dataset.timestamp = parseInt(data.halls.result[j].seance[x].seance_start) * 60;
 					movieSeancesTimeBlock.appendChild(movieSeancesTime);
 
 					movieSeancesList.appendChild(movieSeancesTimeBlock);
